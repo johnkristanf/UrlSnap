@@ -1,6 +1,6 @@
-import { Logo } from "./ui/logo";
-import { NavLinks } from "./ui/navLinks";
-import { AuthBtn } from "./ui/button";
+import { Logo } from "./shorturl/ui/logo";
+import { NavLinks } from "./shorturl/ui/navLinks";
+import { AuthBtn } from "./shorturl/ui/button";
 
 export const NavBar = () => {
 

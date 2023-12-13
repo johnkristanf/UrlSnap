@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from 'react';
 
-const urlSnapScreen = React.lazy(() => import('./pages/urlSnapScreen'));
+const shortUrlScreen = React.lazy(() => import('./pages/shortUrlScreen'));
 
 const App = () => {
 
@@ -13,7 +13,7 @@ const App = () => {
         <Suspense fallback={<div>Loading....</div>}>
 
             <Routes>
-               <Route path="/" Component={urlSnapScreen} />
+               <Route path="/" Component={shortUrlScreen} />
 
             </Routes>
 
