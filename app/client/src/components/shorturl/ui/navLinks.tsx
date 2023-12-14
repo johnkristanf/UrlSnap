@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const link = [
     { name: 'Snap', current: false, to: '/' },
-    { name: 'Qr Code', current: false, to: '/qrcode' }
+    { name: 'Qr Code', current: false, to: '/qrcode-generator' }
 ]
 
 export const NavLinks = () => {

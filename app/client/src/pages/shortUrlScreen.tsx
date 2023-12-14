@@ -6,7 +6,7 @@ import { DataDisplay } from "../components/shorturl/ui/ShorturlDisplay";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
-export default () => {
+const shortUrlScreen = () => {
 
     const queryClient = new QueryClient();
 
@@ -32,3 +32,5 @@ export default () => {
         </> 
     )
 }
+
+export default shortUrlScreen;

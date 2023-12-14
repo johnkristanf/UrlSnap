@@ -1,7 +1,8 @@
-import { ServicesBtn } from "./button";
-import { urlPattern } from "../../../utils/patterns";
+import { ServicesBtn } from "../../ui/button";
 import { createShortUrl } from "../../../services/shorturl/create";
-import { ShortURLFormInput } from "../../../utils/types/shorturl";
+import { ShortURLFormInputTypes } from "../../../utils/types/shorturl";
+
+import { ShorturlInput } from "../../ui/inputs";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
@@ -16,7 +17,7 @@ export const ServicesForm = ({ btnText, placeholder }: any) => {
 
     const queryClient = useQueryClient();
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<ShortURLFormInput>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<ShortURLFormInputTypes>();
 
     const mutation = useMutation(createShortUrl, {
         onSuccess: () => {
@@ -25,7 +26,7 @@ export const ServicesForm = ({ btnText, placeholder }: any) => {
     })
 
 
-    const onSubmit: SubmitHandler<ShortURLFormInput> = async (data) => {
+    const onSubmit: SubmitHandler<ShortURLFormInputTypes> = async (data) => {
         setSubmitting(true)
 
         mutation.mutate(data); 
@@ -43,11 +44,8 @@ export const ServicesForm = ({ btnText, placeholder }: any) => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="flex items-center justify-center gap-3 w-1/2 mt-5">
 
-                <input {...register("longUrl", { pattern: urlPattern, required: true })} 
-                    placeholder={placeholder} 
-                    className="w-full p-3 rounded-md"
-                    /> 
-
+                <ShorturlInput register={register} placeholder={placeholder} />
+                
                 <ServicesBtn btnText={btnText} Submitting={Submitting} />
 
             </form>

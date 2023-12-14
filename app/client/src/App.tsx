@@ -3,6 +3,9 @@ import React, { Suspense } from 'react';
 
 const shortUrlScreen = React.lazy(() => import('./pages/shortUrlScreen'));
 
+const qrCodeScreen = React.lazy(() => import('./pages/qrCodeScreen'));
+
+
 const App = () => {
 
   return(
@@ -14,6 +17,7 @@ const App = () => {
 
             <Routes>
                <Route path="/" Component={shortUrlScreen} />
+               <Route path="/qrcode-generator" Component={qrCodeScreen} />
 
             </Routes>
 

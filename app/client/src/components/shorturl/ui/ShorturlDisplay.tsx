@@ -1,4 +1,4 @@
-import { DataDisplayBtn } from "./button";
+import { DataDisplayBtn } from "../../ui/button";
 
 import { fetchShortUrl } from "../../../services/shorturl/fetch";
 import { ShortURLFormInput } from "../../../utils/types/shorturl";
