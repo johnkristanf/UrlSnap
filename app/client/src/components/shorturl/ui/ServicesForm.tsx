@@ -7,7 +7,7 @@ import { ShorturlInput } from "../../ui/inputs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query';
 
 
 
@@ -55,11 +55,11 @@ export const ServicesForm = ({ btnText, placeholder }: any) => {
 }
 
 
-const isLoading = (mutation: any) => {
+export const isLoading = (mutation: any) => {
     return mutation.isLoading && <div className="text-red-800 font-bold text-4xl">Loading....</div> 
 }
 
 
-const isError = (errors: any) => {
-    return errors.longUrl && ( <p className="text-red-700 text-lg mt-5 font-bold">Invalid URL! please try another url.</p> ) 
+export const isError = (errors: any) => {
+    return errors.longUrl || errors.qrCodeURL && ( <p className="text-red-700 text-lg mt-5 font-bold">Invalid URL! please try another url.</p> ) 
 }

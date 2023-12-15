@@ -26,7 +26,7 @@ export const NavBtn = () => {
             {
                 btnData.map((data) => (
 
-                    <button className={
+                    <button key={data.name} className={
                         classNames(
                             data.current ? 'opacity-75' : 'font-bold text-xl hover:opacity-75'
                         )
@@ -140,7 +140,7 @@ export const OptionsBtn = () => {
             {
               optionsBtnArray.map((data) => (
 
-                <button className={
+                <button key={data.name} className={
                     classNames('bg-violet-700 rounded-md p-3 font-semibold text-white hover:opacity-75')
                 }> 
                   {data.icon} {data.name} 
@@ -153,12 +153,13 @@ export const OptionsBtn = () => {
     )
 }
 
-export const GenerateQrBtn = () => {
+export const GenerateQrBtn = ({ Submitting }: any) => {
 
     return(
 
         <button 
-            type="submit" 
+            type="submit"
+            disabled={Submitting}
             className="w-full bg-violet-700 p-3 rounded-md text-white font-semibold mt-10 hover:opacity-75">
                Generate
         </button>

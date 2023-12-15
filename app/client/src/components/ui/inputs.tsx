@@ -1,4 +1,5 @@
 import { urlPattern } from "../../utils/patterns";
+import { fetchCustomizableQrCode } from "../../services/qrcode/fetchCustomizableQr";
 
 import React, { useState } from 'react';
 
@@ -15,7 +16,7 @@ export const ShorturlInput = ({ register, placeholder }: any) => {
 
 
 
-export const QrCodeInput = () => {
+export const QrCodeInput = ({ register }: any) => {
 
     return(
         <>
@@ -23,8 +24,9 @@ export const QrCodeInput = () => {
 
             <input 
                 type="text" 
-                className="w-full p-5 rounded-md bg-violet-700 placeholder:font-bold mt-2 
-                focus:outline-none text-white"
+
+                {...register("qrCodeURL", { pattern: urlPattern, required: true })} 
+                className="w-full p-5 rounded-md bg-violet-700 placeholder:font-bold mt-2 focus:outline-none text-white"
 
                 placeholder="Place a URL below to link with your QR Code"
             />
@@ -34,19 +36,38 @@ export const QrCodeInput = () => {
     )
 }
 
+const displayCustomizableQrCode = async (backgroundColor: string, foregroundColor: string, setCustomizableQrCode: any): Promise<void> => {
 
-export const QrCodeColorPickerInput = () => {
+  const QrCodeUrl = await fetchCustomizableQrCode(backgroundColor, foregroundColor);
+
+  setCustomizableQrCode(QrCodeUrl);
+
+}
+
+export const QrCodeColorPickerInput = ({ register }: any) => {
 
     const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
     const [foregroundColor, setForegroundColor] = useState('#000000');
+
+    const [CustomizableQrCode, setCustomizableQrCode] = useState<string>('');
   
-    const handleBackgroundColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setBackgroundColor(e.target.value);
-    };
+    const handleBackgroundColorChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setBackgroundColor(value);
+
+      await displayCustomizableQrCode(backgroundColor, foregroundColor, setCustomizableQrCode);
+
+    } 
   
-    const handleForegroundColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForegroundColor(e.target.value);
-    };
+    const handleForegroundColorChange = async (e: React.ChangeEvent<HTMLInputElement>) => { 
+      const { value } = e.target;
+      setForegroundColor(value);
+
+      await displayCustomizableQrCode(backgroundColor, foregroundColor, setCustomizableQrCode);
+
+    }
+
+    console.log('CustomizableQrCode', typeof CustomizableQrCode)
   
 
     return (
@@ -60,13 +81,16 @@ export const QrCodeColorPickerInput = () => {
           <input
             type="text"
             value={backgroundColor}
+            readOnly
             className="w-1/4 p-2 rounded-md bg-violet-700 text-white"/>
 
           <input
             type="color"
             className="bg-violet-700 rounded-lg p-2 absolute left-[20%] top-[-12%] mt-2"
             style={{ height: '36px', width: '36px' }}
+            
             value={backgroundColor}
+            {...register("qrcode_bgcolor", { required: true })} 
             onChange={handleBackgroundColorChange} />
 
 
@@ -80,6 +104,7 @@ export const QrCodeColorPickerInput = () => {
           <input
             type="text"
             value={foregroundColor}
+            readOnly
             className="w-1/4 p-2 rounded-md bg-violet-700 text-white" />
 
 
@@ -87,10 +112,14 @@ export const QrCodeColorPickerInput = () => {
             type="color"
             className="bg-violet-700 rounded-lg p-2 absolute left-[20%] top-[-12%] mt-2"
             style={{ height: '36px', width: '36px' }}
+
             value={foregroundColor}
+            {...register("qrcode_foregroundcolor", { required: true })} 
             onChange={handleForegroundColorChange} />
 
         </div>
+
+        <img src={CustomizableQrCode} />
 
       </div>
 
@@ -100,27 +129,23 @@ export const QrCodeColorPickerInput = () => {
 
 
 
-export const QrCodeResolutionInput = () => {
+export const QrCodeResolutionInput = ({ register }: any) => {
 
-    return(
 
-        <>
-          <label className="font-bold text-slate-700">Resolution</label>
+  return (
 
-          <div className="mt-3 flex gap-3">
+    <div className="mt-3 flex gap-3">
 
-            <label>Low</label>
-             <input type="radio" name="Low"/>
+        <label>Low</label>
+        <input type="checkbox" value="L" {...register("resolution", { required: true })} />
 
-              <label>Medium</label>
-               <input type="radio" name="Medium"/>
+        <label>Medium</label>
+        <input type="checkbox" value="M" {...register("resolution", { required: true })} />
 
-               <label>High</label>
-                <input type="radio" name="High"/>
+        <label>High</label>
+        <input type="checkbox" value="H" {...register("resolution", { required: true })} />
 
-          </div>
+    </div>
 
-        </>
-
-    )
+  );
 }
