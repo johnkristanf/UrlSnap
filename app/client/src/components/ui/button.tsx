@@ -1,12 +1,16 @@
 import { useMutation, useQueryClient } from "react-query";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faEye, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 import { deleteShortUrl } from "../../services/shorturl/delete";
 
+import { deleteQrCode } from "../../services/qrcode/delete";
+
 import Swal from 'sweetalert2';
+
+
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -61,6 +65,7 @@ export const ServicesBtn = ({ btnText, Submitting }: any) => {
 export const DataDisplayBtn = ( { url_id, clicks, urlToCopy } : any) => {
 
     const queryClient = useQueryClient();
+
 
     const copyToClipboard = async () => {
         await navigator.clipboard.writeText(`localhost:5000/${urlToCopy}`);
@@ -164,4 +169,47 @@ export const GenerateQrBtn = ({ Submitting }: any) => {
                Generate
         </button>
     )
+}
+
+
+export const QrCodeDataDisplayActionsBtn = ({ openModal, data }: any) => {
+
+    console.log('qrcode adata', data)
+
+    const queryClient = useQueryClient();
+
+    
+    const deleteMutation = useMutation(deleteQrCode, {
+        onSuccess: () => {
+          queryClient.invalidateQueries('qrCodes')
+        },
+    });
+
+    const qrCodeActionsBtnArray = [
+        {icon: <FontAwesomeIcon icon={faEye}/>, name: 'preview', onclickFunction: () => openModal(data.qrCodeLongURL, data.qrCodeShortURL, data.qrCode)},
+        {icon: <FontAwesomeIcon icon={faTrashCan} />, name: 'delete',  onclickFunction: async () => deleteMutation.mutate(data._id)},
+    ]  
+
+    
+    return(
+
+        <div className="flex gap-5">
+
+            {
+
+              qrCodeActionsBtnArray.map((data: any) => (
+
+                <button onClick={ async () => await data.onclickFunction() } key={data.name} className={
+                    classNames('text-xl hover:opacity-75')
+                }> 
+                  {data.icon} 
+                
+                </button>
+
+              ))
+            }
+
+        </div>
+    )
+
 }

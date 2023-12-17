@@ -6,3 +6,9 @@ export type qrCodeFormTypes = {
     qrcode_foregroundcolor: string,
     resolution: string
 }
+
+export type generatedQrCodeTypes = {
+    qrCodeLongURL: string,
+    qrCodeShortURL: string,
+    qrCode: Buffer
+} 

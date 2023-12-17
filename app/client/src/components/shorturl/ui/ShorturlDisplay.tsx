@@ -1,12 +1,13 @@
 import { DataDisplayBtn } from "../../ui/button";
 
 import { fetchShortUrl } from "../../../services/shorturl/fetch";
-import { ShortURLFormInput } from "../../../utils/types/shorturl";
+import { ShortURLFormInputTypes } from "../../../utils/types/shorturl";
 import { generateRandomString } from "../../../utils/generateKey";
 
-import { useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 
 import '../../../../public/scrollStyle.css';
+
 
 export const DataDisplay = () => {
 
@@ -17,7 +18,7 @@ export const DataDisplay = () => {
         <div className="overflow-auto scrollable-container px-5 mt-8 h-[75%] w-[53%]">
 
         {
-            url.data?.data.map((data: ShortURLFormInput) => (
+            url.data?.data.map((data: ShortURLFormInputTypes) => (
 
                 <div key={generateRandomString(5)} className="flex w-full justify-between w-1/2 mb-5 bg-slate-200 p-5 rounded-md">
 

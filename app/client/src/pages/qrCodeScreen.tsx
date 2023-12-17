@@ -5,6 +5,7 @@ import { QrOptions } from "../components/qrcode/qrOptions";
 
 import { QrCodeDescription } from "../components/qrcode/qrDescription";
 import { CustomQrCodeForm } from "../components/qrcode/customQrcodeForm";
+import { QrCodeDataDisplay } from "../components/qrcode/qrCodeDataDisplay";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -27,7 +28,8 @@ const qrCodeScreen = () => {
 
                     <QueryClientProvider client={queryClient}>
                         <CustomQrCodeForm />
-
+                        <QrCodeDataDisplay />
+                        
                     </QueryClientProvider>
                   
                 </div>
