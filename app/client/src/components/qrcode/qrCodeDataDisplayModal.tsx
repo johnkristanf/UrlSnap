@@ -1,8 +1,12 @@
+import { QrCodeDownloadQrFormatBtn } from "../ui/button";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
-export const QrCodeDataDisplayModal = ({ qrCodeData }: any) => {
+export const QrCodeDataDisplayModal = ({ qrCodeData, setopenQrModal }: any) => {
 
-    // const imageData = `data:image/png;base64,${qrCodeData.qrCode}`;
+    const imageData = `data:image/png;base64,${qrCodeData.qrCode}`;
+
 
     return(
 
@@ -11,17 +15,54 @@ export const QrCodeDataDisplayModal = ({ qrCodeData }: any) => {
 
         <div className="w-full h-screen fixed top-0 z-[600] flex justify-center py-16">
 
-            <div className="bg-slate-200 w-[60%] rounded-md flex justify-evenly items-center">
 
-                <img src={qrCodeData.qrCode} width={150} />
+            <div className="bg-slate-200 w-[60%] rounded-md flex justify-evenly items-center relative">
 
-                <div className="flex flex-col">
+                <div className="flex justify-between items-center absolute top-8 w-full px-8">
 
-                   <label className="font-bold text-slate-700">Qr Code Long URL</label>
-                   <h1 className="font-bold text-xl text-violet-700">{qrCodeData.qrCodeLongURL}</h1>
+                    <label className="font-bold text-slate-700 text-3xl">Qr Code Details</label>
 
-                   <label className="font-bold text-slate-700">Qr Code Short URL</label>
-                   <h1 className="font-bold text-xl text-violet-700">http://localhost:8000/{qrCodeData.qrCodeShortURL}</h1>
+                        <FontAwesomeIcon onClick={() => setopenQrModal(false)} 
+                           icon={faX} 
+                           className="font-bold text-3xl hover:opacity-75 hover:cursor-pointer"
+                        />
+
+                </div>
+
+                <img src={imageData} alt="QR Code" width={200} className="rounded-md"/>
+
+
+                <div className="flex flex-col gap-10 w-1/2">
+
+
+                   <div className="flex flex-col">
+                       <label className="font-bold text-slate-700 text-2xl">Long URL:</label>
+
+                       <a href={qrCodeData.qrCodeLongURL} target="_blank" 
+                            className="font-bold text-xl text-violet-700 overflow-hidden text-ellipsis whitespace-nowrap">
+                            { qrCodeData.qrCodeLongURL }
+                        </a>
+
+                   </div>
+
+
+                    <div className="flex flex-col">
+                        <label className="font-bold text-slate-700 text-2xl"> Short URL:</label>
+
+                        <a href={`http://localhost:5000/qr/${qrCodeData.qrCodeShortURL}`} target="_blank" 
+                            className="font-bold text-xl text-violet-700">
+                            http://localhost:5000/qr/{qrCodeData.qrCodeShortURL}
+                        </a>
+
+                    </div>
+        
+
+                    <div>
+                        <h1 className="font-bold text-slate-700 text-2xl">Download Qr Code via:</h1>
+                        <QrCodeDownloadQrFormatBtn />
+
+                    </div>
+
 
                 </div>
 

@@ -8,6 +8,8 @@ import { useState } from "react";
 
 import { QrCodeDataDisplayModal } from "./qrCodeDataDisplayModal";
 
+
+
 export const QrCodeDataDisplay = () => {
 
     const [openQrModal, setopenQrModal] = useState(false);
@@ -19,17 +21,12 @@ export const QrCodeDataDisplay = () => {
     });
 
 
-    const openModal = (longURL: string, shortURL: string, qrCode: Buffer) => {
-
-
-
-        const blob = new Blob([qrCode], { type: 'image/png' });
-        const qrcode = URL.createObjectURL(blob);
+    const openModal = (longURL: string, shortURL: string, qrCode: string) => {
 
         const qrData = {
             qrCodeLongURL: longURL,
             qrCodeShortURL: shortURL,
-            qrCode: qrcode
+            qrCode: qrCode
         }
 
         setqrCodeData(qrData);
@@ -37,6 +34,7 @@ export const QrCodeDataDisplay = () => {
     }
 
     const qrcode = useQuery('qrCodes', fetchAllQrCodes);
+
 
     return(
 
@@ -63,7 +61,7 @@ export const QrCodeDataDisplay = () => {
         </div>
 
 
-        { openQrModal && <QrCodeDataDisplayModal qrCodeData={qrCodeData} /> }
+        { openQrModal && <QrCodeDataDisplayModal qrCodeData={qrCodeData} setopenQrModal={setopenQrModal} /> }
 
 
         </>

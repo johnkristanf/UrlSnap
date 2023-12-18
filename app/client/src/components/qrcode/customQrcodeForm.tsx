@@ -42,6 +42,17 @@ export const CustomQrCodeForm = () => {
 
     }
 
+
+    // PAGHIMOG ISA KA USESTATE TAS STRING ANG VALUE TAS EVERY BUTTON NAAY MA SET NGA VALUE FOR url,facebok,tiwtter
+
+    // TAS PAG RENDER DAYOG LAHI NGA INPUT SULOD SAIMONG FORM VIA : 
+    
+    // { state === 'webUrl' && <QrCodeInput register={register} /> }
+
+    // { state === 'facebook' && <FacebookInput register={register} /> }
+
+     // { state === 'twitter' && <TwitterInput register={register} /> }
+
     return(
         
         <>

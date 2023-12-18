@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink, faEye, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faEye, faTrashCan, faQrcode } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 import { deleteShortUrl } from "../../services/shorturl/delete";
@@ -158,6 +158,7 @@ export const OptionsBtn = () => {
     )
 }
 
+
 export const GenerateQrBtn = ({ Submitting }: any) => {
 
     return(
@@ -174,8 +175,6 @@ export const GenerateQrBtn = ({ Submitting }: any) => {
 
 export const QrCodeDataDisplayActionsBtn = ({ openModal, data }: any) => {
 
-    console.log('qrcode adata', data)
-
     const queryClient = useQueryClient();
 
     
@@ -184,6 +183,7 @@ export const QrCodeDataDisplayActionsBtn = ({ openModal, data }: any) => {
           queryClient.invalidateQueries('qrCodes')
         },
     });
+    
 
     const qrCodeActionsBtnArray = [
         {icon: <FontAwesomeIcon icon={faEye}/>, name: 'preview', onclickFunction: () => openModal(data.qrCodeLongURL, data.qrCodeShortURL, data.qrCode)},
@@ -212,4 +212,36 @@ export const QrCodeDataDisplayActionsBtn = ({ openModal, data }: any) => {
         </div>
     )
 
+}
+
+export const QrCodeDownloadQrFormatBtn = () => {
+
+    const formatBtn = [
+        {name: 'PNG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: ''},
+        {name: 'JPEG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: ''},
+        {name: 'SVG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: ''}
+    ]
+
+    return(
+
+    
+        <div className="flex gap-4 mt-3">
+
+            {
+                formatBtn.map((data) => (
+
+                    <button 
+                    key={data.name}
+                    type="button"
+                    className={classNames('bg-violet-700 w-[60%] p-3 rounded-md text-white font-bold hover:opacity-75')}
+                
+                    > 
+                       {data.icon} {data.name} 
+                    </button>
+                ))
+            }
+
+        </div>
+
+    )
 }

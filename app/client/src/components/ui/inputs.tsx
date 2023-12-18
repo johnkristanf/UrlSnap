@@ -1,7 +1,7 @@
 import { urlPattern } from "../../utils/patterns";
 import { fetchCustomizableQrCode } from "../../services/qrcode/fetchCustomizableQr";
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export const ShorturlInput = ({ register, placeholder }: any) => {
@@ -58,24 +58,9 @@ export const QrCodeColorPickerInput = ({ register }: any) => {
       }
 
       customizableQrCode();
-    }, [])
 
-  
-    const handleBackgroundColorChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-      setBackgroundColor(value);
+    }, [backgroundColor, foregroundColor])
 
-      await displayCustomizableQrCode(backgroundColor, foregroundColor, setCustomizableQrCode);
-
-    } 
-  
-    const handleForegroundColorChange = async (e: React.ChangeEvent<HTMLInputElement>) => { 
-      const { value } = e.target;
-      setForegroundColor(value);
-
-      await displayCustomizableQrCode(backgroundColor, foregroundColor, setCustomizableQrCode);
-
-    }  
 
     return (
 
@@ -101,7 +86,8 @@ export const QrCodeColorPickerInput = ({ register }: any) => {
             
                 value={backgroundColor}
                 {...register("qrcode_bgcolor", { required: true })} 
-                onChange={handleBackgroundColorChange} />
+                onChange={(e) => setBackgroundColor(e.target.value)}
+               />
 
 
           </div>
@@ -125,7 +111,9 @@ export const QrCodeColorPickerInput = ({ register }: any) => {
 
                 value={foregroundColor}
                 {...register("qrcode_foregroundcolor", { required: true })} 
-                onChange={handleForegroundColorChange} />
+                onChange={(e) => setForegroundColor(e.target.value)}
+
+                />
 
           </div>
 
@@ -144,27 +132,25 @@ export const QrCodeColorPickerInput = ({ register }: any) => {
 
 export const QrCodeResolutionInput = ({ register }: any) => {
 
-
   return (
-
     <>
 
       <label className="font-bold text-slate-700">Resolution</label>
 
-          <div className="mt-3 flex gap-3">
+      <div className="mt-3 flex gap-3">
+
+        <label>Low</label>
+        <input type="radio" value="L" defaultChecked {...register("resolution", { required: true })} />
+
+        <label>Meduim</label>
+        <input type="radio" value="M" {...register("resolution", { required: true })} />
+
+        <label>High</label>
+        <input type="radio" value="H" {...register("resolution", { required: true })} />
+
+      </div>
       
-            <label>Low</label>
-            <input type="checkbox" value="L" {...register("resolution", { required: true })} />
-
-            <label>Medium</label>
-            <input type="checkbox" value="M" {...register("resolution", { required: true })} />
-
-            <label>High</label>
-            <input type="checkbox" value="H" {...register("resolution", { required: true })} />
-
-          </div>
     </>
 
   );
-
-}
+};
