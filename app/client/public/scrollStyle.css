@@ -1,6 +1,6 @@
 /* styles.css */
 .scrollable-container {
-    max-height: 300px; /* Set a maximum height to enable scrolling */
+     /* Set a maximum height to enable scrolling */
     overflow-y: auto; /* Enable vertical scrolling */
     /* Other styles for the container */
   }

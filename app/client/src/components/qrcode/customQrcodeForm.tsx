@@ -1,4 +1,4 @@
-import { QrCodeInput } from "../ui/inputs";
+import { WebURLQrCodeInput, TwitterQrCodeInput, FaceebookQrCodeInput } from "../ui/inputs";
 import { QrCodeColorPickerInput } from "../ui/inputs";
 import { QrCodeResolutionInput } from "../ui/inputs";
 
@@ -6,18 +6,19 @@ import { GenerateQrBtn } from "../ui/button";
 
 import { qrCodeFormTypes } from "../../utils/types/qrCodeFormTypes";
 
-import { isError, isLoading } from "../shorturl/ui/ServicesForm";
+import { isLoading, isError } from "../../services/validator/inputs";
 
-import { createQrCode } from "../../services/qrcode/create";
+import { createQrCode } from "../../services/httpRequest/qrcode/create";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useMutation, useQueryClient } from 'react-query';
-import { useState } from "react";
+import React, { useState } from "react";
+
+import { SelectedQrCodeOption } from "../../utils/interface/qrcodes";
 
 
-
-export const CustomQrCodeForm = () => {
+export const CustomQrCodeForm: React.FC<SelectedQrCodeOption> = ({ selectedQrCodeOption }) => {
 
     const [Submitting, setSubmitting] = useState(false);
 
@@ -42,17 +43,6 @@ export const CustomQrCodeForm = () => {
 
     }
 
-
-    // PAGHIMOG ISA KA USESTATE TAS STRING ANG VALUE TAS EVERY BUTTON NAAY MA SET NGA VALUE FOR url,facebok,tiwtter
-
-    // TAS PAG RENDER DAYOG LAHI NGA INPUT SULOD SAIMONG FORM VIA : 
-    
-    // { state === 'webUrl' && <QrCodeInput register={register} /> }
-
-    // { state === 'facebook' && <FacebookInput register={register} /> }
-
-     // { state === 'twitter' && <TwitterInput register={register} /> }
-
     return(
         
         <>
@@ -64,7 +54,11 @@ export const CustomQrCodeForm = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} >
 
-                   <QrCodeInput register={register} />
+                    { selectedQrCodeOption === 'WebURL' && <WebURLQrCodeInput register={register} /> }
+
+                    { selectedQrCodeOption === 'Facebook' && <FaceebookQrCodeInput register={register} /> }
+
+                    { selectedQrCodeOption === 'Twitter' && <TwitterQrCodeInput register={register} /> }
 
                    <QrCodeColorPickerInput register={register} />
 

@@ -3,10 +3,14 @@ import { useQuery } from "react-query";
 import { generatedQrCodeTypes } from "../../utils/types/qrCodeFormTypes";
 import { QrCodeDataDisplayActionsBtn } from "../ui/button";
 
-import { fetchAllQrCodes } from "../../services/qrcode/fetchAll";
+import { fetchAllQrCodes } from "../../services/httpRequest/qrcode/fetchAll";
 import { useState } from "react";
 
 import { QrCodeDataDisplayModal } from "./qrCodeDataDisplayModal";
+
+import '../../../public/scrollStyle.css';
+
+import { fbPost } from "../../services/httpRequest/qrcode/fbpost";
 
 
 
@@ -21,12 +25,13 @@ export const QrCodeDataDisplay = () => {
     });
 
 
-    const openModal = (longURL: string, shortURL: string, qrCode: string) => {
+    const openModal = (longURL: string, shortURL: string, qrCode: string, qrCode_id: string) => {
 
         const qrData = {
             qrCodeLongURL: longURL,
             qrCodeShortURL: shortURL,
-            qrCode: qrCode
+            qrCode: qrCode,
+            qrCode_id,
         }
 
         setqrCodeData(qrData);
@@ -40,7 +45,7 @@ export const QrCodeDataDisplay = () => {
 
         <>
 
-        <div className="w-[30%] mt-8 p-5 h-[93%] rounded-md bg-slate-200">
+        <div className="w-[30%] mt-8 p-5 h-[93%] rounded-md bg-slate-200 scrollable-container overflow-auto">
 
             <h1 className="text-slate-700 text-2xl font-bold mb-5">Generated Qr Codes</h1>
 
@@ -57,6 +62,8 @@ export const QrCodeDataDisplay = () => {
                     </div>
                 ))
             }
+
+            {/* <button onClick={fbPost} className="bg-violet-700 p-3 rounded-md text-white">FaceBook Intergrated</button> */}
 
         </div>
 

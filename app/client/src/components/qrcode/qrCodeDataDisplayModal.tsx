@@ -7,6 +7,8 @@ export const QrCodeDataDisplayModal = ({ qrCodeData, setopenQrModal }: any) => {
 
     const imageData = `data:image/png;base64,${qrCodeData.qrCode}`;
 
+    console.log('qrCodeData', qrCodeData)
+
 
     return(
 
@@ -59,7 +61,7 @@ export const QrCodeDataDisplayModal = ({ qrCodeData, setopenQrModal }: any) => {
 
                     <div>
                         <h1 className="font-bold text-slate-700 text-2xl">Download Qr Code via:</h1>
-                        <QrCodeDownloadQrFormatBtn />
+                        <QrCodeDownloadQrFormatBtn qrcode_id={qrCodeData.qrCode_id} />
 
                     </div>
 

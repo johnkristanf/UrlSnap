@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { qrCodeFormTypes } from '../../utils/types/qrCodeFormTypes';
+import { qrCodeFormTypes } from '../../../utils/types/qrCodeFormTypes';
 
 export const createQrCode = async (qrCodeData: qrCodeFormTypes) => {
 

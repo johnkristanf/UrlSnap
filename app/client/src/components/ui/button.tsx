@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faEye, faTrashCan, faQrcode } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
-import { deleteShortUrl } from "../../services/shorturl/delete";
+import { deleteShortUrl} from "../../services/httpRequest/shorturl/delete";
+import { deleteQrCode } from "../../services/httpRequest/qrcode/delete";
+import { downloadQrCode } from "../../services/httpRequest/qrcode/download";
 
-import { deleteQrCode } from "../../services/qrcode/delete";
+import { SetselectedQrCodeOption } from "../../utils/interface/qrcodes";
 
+
+import React, { useRef, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 
@@ -129,15 +133,39 @@ export const DataDisplayBtn = ( { url_id, clicks, urlToCopy } : any) => {
 
 
 
-export const OptionsBtn = () => {
 
-    const optionsBtnArray = [
 
-        {name: 'URL', icon: <FontAwesomeIcon icon={faLink}/> },
-        {name: 'Facebook', icon: <FontAwesomeIcon icon={faFacebook} />},
-        {name: 'Twitter', icon: <FontAwesomeIcon icon={faXTwitter} />},
+export const OptionsBtn: React.FC<SetselectedQrCodeOption> = ({ setselectedQrCodeOption }) => {
+
+    const buttonRef = useRef<any>(null);
+
+    const handleFirstButtonClick = () => {
+      buttonRef.current.click();
+      setselectedQrCodeOption('WebURL')
+    };
+
+    useEffect(() => {
+        // Trigger the click of the first button after component mounts
+        handleFirstButtonClick();
+      }, []); // Empty dependency array ensures this effect runs only once after initial render
     
-    ]    
+      const optionsBtnArray = [
+        {
+          name: 'URL',
+          icon: <FontAwesomeIcon icon={faLink} />,
+          setselectedQrCodeOption: handleFirstButtonClick, // Pass the function directly
+        },
+        {
+          name: 'Facebook',
+          icon: <FontAwesomeIcon icon={faFacebook} />,
+          setselectedQrCodeOption: () => setselectedQrCodeOption('Facebook'),
+        },
+        {
+          name: 'Twitter',
+          icon: <FontAwesomeIcon icon={faXTwitter} />,
+          setselectedQrCodeOption: () => setselectedQrCodeOption('Twitter'),
+        },
+      ];  
 
     return(
 
@@ -145,9 +173,13 @@ export const OptionsBtn = () => {
             {
               optionsBtnArray.map((data) => (
 
-                <button key={data.name} className={
+                <button 
+                   ref={buttonRef}
+                   onClick={() => data.setselectedQrCodeOption()}
+                   key={data.name} 
+                   className={
                     classNames('bg-violet-700 rounded-md p-3 font-semibold text-white hover:opacity-75')
-                }> 
+                   }> 
                   {data.icon} {data.name} 
                 
                 </button>
@@ -159,6 +191,7 @@ export const OptionsBtn = () => {
 }
 
 
+
 export const GenerateQrBtn = ({ Submitting }: any) => {
 
     return(
@@ -166,7 +199,7 @@ export const GenerateQrBtn = ({ Submitting }: any) => {
         <button 
             type="submit"
             disabled={Submitting}
-            className="w-full bg-violet-700 p-3 rounded-md text-white font-semibold mt-10 hover:opacity-75">
+            className="w-full bg-violet-700 p-3 rounded-md text-white font-semibold mt-5 hover:opacity-75">
                Generate
         </button>
     )
@@ -186,7 +219,7 @@ export const QrCodeDataDisplayActionsBtn = ({ openModal, data }: any) => {
     
 
     const qrCodeActionsBtnArray = [
-        {icon: <FontAwesomeIcon icon={faEye}/>, name: 'preview', onclickFunction: () => openModal(data.qrCodeLongURL, data.qrCodeShortURL, data.qrCode)},
+        {icon: <FontAwesomeIcon icon={faEye}/>, name: 'preview', onclickFunction: () => openModal(data.qrCodeLongURL, data.qrCodeShortURL, data.qrCode, data._id)},
         {icon: <FontAwesomeIcon icon={faTrashCan} />, name: 'delete',  onclickFunction: async () => deleteMutation.mutate(data._id)},
     ]  
 
@@ -214,12 +247,15 @@ export const QrCodeDataDisplayActionsBtn = ({ openModal, data }: any) => {
 
 }
 
-export const QrCodeDownloadQrFormatBtn = () => {
+export const QrCodeDownloadQrFormatBtn = ({ qrcode_id }: any ) => {
+
+    const downloadQrCodeVia = async (format: string) => await downloadQrCode(format, qrcode_id);
+
 
     const formatBtn = [
-        {name: 'PNG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: ''},
-        {name: 'JPEG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: ''},
-        {name: 'SVG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: ''}
+        {name: 'PNG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: () => downloadQrCodeVia('png')},
+        {name: 'JPEG', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: () => downloadQrCodeVia('jpeg')},
+        {name: 'WEBP', icon: <FontAwesomeIcon icon={faQrcode}/>, onclickFunction: () => downloadQrCodeVia('webp')}
     ]
 
     return(
@@ -231,8 +267,9 @@ export const QrCodeDownloadQrFormatBtn = () => {
                 formatBtn.map((data) => (
 
                     <button 
-                    key={data.name}
                     type="button"
+                    onClick={() => data.onclickFunction()}
+                    key={data.name}
                     className={classNames('bg-violet-700 w-[60%] p-3 rounded-md text-white font-bold hover:opacity-75')}
                 
                     > 

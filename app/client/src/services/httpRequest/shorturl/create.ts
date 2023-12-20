@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ShortURLFormInputTypes } from '../../utils/types/shorturl';
+import { ShortURLFormInputTypes } from '../../../utils/types/shorturl';
 
 export const createShortUrl = async (urldata: ShortURLFormInputTypes) => {
 

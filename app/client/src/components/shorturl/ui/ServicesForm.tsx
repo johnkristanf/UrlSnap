@@ -1,5 +1,6 @@
 import { ServicesBtn } from "../../ui/button";
-import { createShortUrl } from "../../../services/shorturl/create";
+import { createShortUrl } from "../../../services/httpRequest/shorturl/create";
+
 import { ShortURLFormInputTypes } from "../../../utils/types/shorturl";
 
 import { ShorturlInput } from "../../ui/inputs";
@@ -8,6 +9,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 
 import { useMutation, useQueryClient } from 'react-query';
+
+import { isLoading, isError } from "../../../services/validator/inputs";
+
 
 
 
@@ -55,11 +59,3 @@ export const ServicesForm = ({ btnText, placeholder }: any) => {
 }
 
 
-export const isLoading = (mutation: any) => {
-    return mutation.isLoading && <div className="text-red-800 font-bold text-4xl">Loading....</div> 
-}
-
-
-export const isError = (errors: any) => {
-    return errors.longUrl || errors.qrCodeURL && ( <p className="text-red-700 text-lg mt-5 font-bold">Invalid URL! please try another url.</p> ) 
-}
