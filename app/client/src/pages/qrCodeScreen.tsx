@@ -8,12 +8,9 @@ import { CustomQrCodeForm } from "../components/qrcode/customQrcodeForm";
 import { QrCodeDataDisplay } from "../components/qrcode/qrCodeDataDisplay";
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { useState } from "react";
 
 
 const qrCodeScreen = () => {
-
-    const [selectedQrCodeOption, setselectedQrCodeOption] = useState<string>('');
 
     const queryClient = new QueryClient();
 
@@ -28,11 +25,11 @@ const qrCodeScreen = () => {
 
                 <div className="w-full flex justify-around h-full">
 
-                    <QrOptions setselectedQrCodeOption={setselectedQrCodeOption} />
+                    <QrOptions  />
 
                     <QueryClientProvider client={queryClient}>
-                        <CustomQrCodeForm selectedQrCodeOption={selectedQrCodeOption}/>
-                        <QrCodeDataDisplay />
+                        <CustomQrCodeForm />
+                        <QrCodeDataDisplay  />
                         
                     </QueryClientProvider>
                   

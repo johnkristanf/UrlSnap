@@ -2,16 +2,14 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faEye, faTrashCan, faQrcode } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 import { deleteShortUrl} from "../../services/httpRequest/shorturl/delete";
 import { deleteQrCode } from "../../services/httpRequest/qrcode/delete";
 import { downloadQrCode } from "../../services/httpRequest/qrcode/download";
 
-import { SetselectedQrCodeOption } from "../../utils/interface/qrcodes";
+import { downloadAudio } from "../../services/httpRequest/converter/download";
+import { convertNextYtURL } from "../../services/httpRequest/converter/convertNext";
 
-
-import React, { useRef, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 
@@ -96,7 +94,7 @@ export const DataDisplayBtn = ( { url_id, clicks, urlToCopy } : any) => {
     const displayBtn = [
         { 
             name: 'Copy', 
-            classname: 'text-violet-700  font-semibold hover:opacity-75', 
+            classname: 'text-black  font-semibold hover:opacity-75', 
             onclickFunction: copyToClipboard 
         },
 
@@ -135,36 +133,16 @@ export const DataDisplayBtn = ( { url_id, clicks, urlToCopy } : any) => {
 
 
 
-export const OptionsBtn: React.FC<SetselectedQrCodeOption> = ({ setselectedQrCodeOption }) => {
+export const OptionsBtn = () => {
 
-    const buttonRef = useRef<any>(null);
-
-    const handleFirstButtonClick = () => {
-      buttonRef.current.click();
-      setselectedQrCodeOption('WebURL')
-    };
-
-    useEffect(() => {
-        // Trigger the click of the first button after component mounts
-        handleFirstButtonClick();
-      }, []); // Empty dependency array ensures this effect runs only once after initial render
+  
     
       const optionsBtnArray = [
         {
           name: 'URL',
           icon: <FontAwesomeIcon icon={faLink} />,
-          setselectedQrCodeOption: handleFirstButtonClick, // Pass the function directly
         },
-        {
-          name: 'Facebook',
-          icon: <FontAwesomeIcon icon={faFacebook} />,
-          setselectedQrCodeOption: () => setselectedQrCodeOption('Facebook'),
-        },
-        {
-          name: 'Twitter',
-          icon: <FontAwesomeIcon icon={faXTwitter} />,
-          setselectedQrCodeOption: () => setselectedQrCodeOption('Twitter'),
-        },
+        
       ];  
 
     return(
@@ -174,8 +152,7 @@ export const OptionsBtn: React.FC<SetselectedQrCodeOption> = ({ setselectedQrCod
               optionsBtnArray.map((data) => (
 
                 <button 
-                   ref={buttonRef}
-                   onClick={() => data.setselectedQrCodeOption()}
+                  
                    key={data.name} 
                    className={
                     classNames('bg-violet-700 rounded-md p-3 font-semibold text-white hover:opacity-75')
@@ -280,5 +257,52 @@ export const QrCodeDownloadQrFormatBtn = ({ qrcode_id }: any ) => {
 
         </div>
 
+    )
+}
+
+
+export const ConvertYTMP3Btn = ({ Submitting }: any) => {
+
+    return(
+
+        <button 
+            type="submit"
+            disabled={Submitting}
+            className="w-[30%] bg-slate-200 p-4 rounded-md text-black font-bold text-xl hover:opacity-75">
+               Convert
+        </button>
+    )
+}
+
+
+export const DownloadAudioBtn = ({ audioFilePath }: any) => {
+
+    return(
+
+        <button 
+            type="submit"
+            onClick={() => downloadAudio(audioFilePath)}
+            className="w-[40%] bg-black p-2 rounded-md text-white font-bold text-xl hover:opacity-75">
+               Download
+        </button>
+    )
+}
+
+
+export const ConvertNextBtn = ({ setaudioFilePath, audioFilePath }: any) => {
+
+    const convertNext = () => {
+        setaudioFilePath()
+        convertNextYtURL(audioFilePath);
+    }
+
+    return(
+
+        <button 
+            type="submit"
+            onClick={() => convertNext()}
+            className="w-[50%] bg-black p-2 rounded-md text-white font-bold text-xl hover:opacity-75">
+               Convert Next
+        </button>
     )
 }

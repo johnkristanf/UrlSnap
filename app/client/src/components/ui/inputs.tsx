@@ -1,8 +1,7 @@
-import { urlPattern } from "../../utils/patterns";
+import { urlPattern, YTurlPattern } from "../../utils/patterns";
 import { fetchCustomizableQrCode } from "../../services/httpRequest/qrcode/fetchCustomizableQr";
 
 import { useEffect, useState } from 'react';
-
 
 export const ShorturlInput = ({ register, placeholder }: any) => {
 
@@ -40,50 +39,6 @@ export const WebURLQrCodeInput = ({ register }: any) => {
 }
 
 
-export const FaceebookQrCodeInput = ({ register }: any) => {
-
-  return(
-      <>
-          <label className="text-slate-700 text-xl font-bold">URL you want to post in Facebook</label>
-
-          <p className="text-slate-700 text-[12px] font-bold mb-3 mt-1">If you have a very long URL make sure to lower the resolution to make the qr code readable in scanners</p>
-
-          <input 
-              type="text" 
-
-              {...register("qrCodeURL", { pattern: urlPattern, required: true })} 
-              className="w-full p-5 rounded-md bg-violet-700 placeholder:font-bold mt-2 focus:outline-none text-white"
-
-              placeholder="Type or paste a link(URL)"
-          />
-
-      </>
-
-  )
-}
-
-
-export const TwitterQrCodeInput = ({ register }: any) => {
-
-  return(
-      <>
-          <label className="text-slate-700 text-xl font-bold">X message</label>
-
-          <p className="text-slate-700 text-[12px] font-bold mb-3 mt-1">If you have a very long URL make sure to lower the resolution to make the qr code readable in scanners</p>
-
-          <input 
-              type="text" 
-
-              {...register("qrCodeURL", { required: true })} 
-              className="w-full p-5 rounded-md bg-violet-700 placeholder:font-bold mt-2 focus:outline-none text-white"
-
-              placeholder="Type or paste a tweet"
-          />
-
-      </>
-
-  )
-}
 
 const displayCustomizableQrCode = async (backgroundColor: string, foregroundColor: string, setCustomizableQrCode: any): Promise<void> => {
 
@@ -202,4 +157,22 @@ export const QrCodeResolutionInput = ({ register }: any) => {
     </>
 
   );
+
 };
+
+
+export const ConverterInput = ({ register }: any) => {
+
+  return(
+
+    <input 
+    type="text" 
+
+    {...register("youtubeURL", { pattern: YTurlPattern, required: true })} 
+    className="w-full p-5 rounded-md bg-black placeholder:font-bold focus:outline-none text-white"
+
+    placeholder="https://www.youtube.com/watch?v=x1iXA041zM4"
+    />
+
+  )
+}

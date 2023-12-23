@@ -1,4 +1,4 @@
-import { WebURLQrCodeInput, TwitterQrCodeInput, FaceebookQrCodeInput } from "../ui/inputs";
+import { WebURLQrCodeInput } from "../ui/inputs";
 import { QrCodeColorPickerInput } from "../ui/inputs";
 import { QrCodeResolutionInput } from "../ui/inputs";
 
@@ -13,12 +13,12 @@ import { createQrCode } from "../../services/httpRequest/qrcode/create";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useMutation, useQueryClient } from 'react-query';
-import React, { useState } from "react";
-
-import { SelectedQrCodeOption } from "../../utils/interface/qrcodes";
+import { useState } from "react";
 
 
-export const CustomQrCodeForm: React.FC<SelectedQrCodeOption> = ({ selectedQrCodeOption }) => {
+
+
+export const CustomQrCodeForm= () => {
 
     const [Submitting, setSubmitting] = useState(false);
 
@@ -54,11 +54,8 @@ export const CustomQrCodeForm: React.FC<SelectedQrCodeOption> = ({ selectedQrCod
 
                 <form onSubmit={handleSubmit(onSubmit)} >
 
-                    { selectedQrCodeOption === 'WebURL' && <WebURLQrCodeInput register={register} /> }
+                    <WebURLQrCodeInput register={register} /> 
 
-                    { selectedQrCodeOption === 'Facebook' && <FaceebookQrCodeInput register={register} /> }
-
-                    { selectedQrCodeOption === 'Twitter' && <TwitterQrCodeInput register={register} /> }
 
                    <QrCodeColorPickerInput register={register} />
 

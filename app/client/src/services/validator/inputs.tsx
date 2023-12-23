@@ -9,10 +9,10 @@ export const isLoading = (mutation: any) => {
 
 export const isError = (errors: any) => {
 
-    if(errors.longUrl || errors.qrCodeURL){
+    if(errors.longUrl || errors.qrCodeURL || errors.youtubeURL){
         
         Swal.fire({
-            position: "top-end",
+            position: "top",
             icon: "error",
             title: "Invalid URL! Please try another url.",
             showConfirmButton: false,

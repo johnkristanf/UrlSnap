@@ -7,7 +7,7 @@ export const Logo = () => {
 
         <div className='flex items-center gap-2'>
            <FontAwesomeIcon icon={faLink} className='text-4xl'/>
-           <h1 className='text-violet-700 font-bold text-3xl'>UrlSnap</h1>
+           <h1 className='max-md:text-slate-200 text-violet-700 font-bold text-3xl'>UrlSnap</h1>
            
         </div>
     )

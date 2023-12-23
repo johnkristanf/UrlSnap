@@ -46,7 +46,7 @@ export const ServicesForm = ({ btnText, placeholder }: any) => {
 
             { isError(errors) }
 
-            <form onSubmit={handleSubmit(onSubmit)} className="flex items-center justify-center gap-3 w-1/2 mt-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-lg:w-[76%] max-sm:w-[90%] flex items-center justify-center gap-3 w-1/2 mt-5">
 
                 <ShorturlInput register={register} placeholder={placeholder} />
                 
