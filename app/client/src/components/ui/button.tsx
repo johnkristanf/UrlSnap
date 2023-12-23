@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink, faEye, faTrashCan, faQrcode } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faTrashCan, faQrcode } from '@fortawesome/free-solid-svg-icons';
 
 import { deleteShortUrl} from "../../services/httpRequest/shorturl/delete";
 import { deleteQrCode } from "../../services/httpRequest/qrcode/delete";

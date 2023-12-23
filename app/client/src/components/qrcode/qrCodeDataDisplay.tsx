@@ -4,14 +4,13 @@ import { generatedQrCodeTypes } from "../../utils/types/qrCodeFormTypes";
 import { QrCodeDataDisplayActionsBtn } from "../ui/button";
 
 import { fetchAllQrCodes } from "../../services/httpRequest/qrcode/fetchAll";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { QrCodeDataDisplayModal } from "./qrCodeDataDisplayModal";
 
 import '../../../public/scrollStyle.css';
 
-import { fbPost } from "../../services/httpRequest/qrcode/fbpost";
-import { SelectedQrCodeOption } from "../../utils/interface/qrcodes";
+
 
 
 
