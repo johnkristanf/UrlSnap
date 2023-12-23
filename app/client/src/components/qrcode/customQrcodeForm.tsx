@@ -46,7 +46,7 @@ export const CustomQrCodeForm= () => {
     return(
         
         <>
-            <div className="bg-slate-200 p-8 mt-8 w-[40%] h-[93%] rounded-md">
+            <div className="max-xl:w-[80%] bg-slate-200 p-8 mt-8 w-[40%] h-[93%] rounded-md">
 
                     { isLoading(mutation) }
 

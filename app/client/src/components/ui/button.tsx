@@ -133,41 +133,6 @@ export const DataDisplayBtn = ( { url_id, clicks, urlToCopy } : any) => {
 
 
 
-export const OptionsBtn = () => {
-
-  
-    
-      const optionsBtnArray = [
-        {
-          name: 'URL',
-          icon: <FontAwesomeIcon icon={faLink} />,
-        },
-        
-      ];  
-
-    return(
-
-        <>
-            {
-              optionsBtnArray.map((data) => (
-
-                <button 
-                  
-                   key={data.name} 
-                   className={
-                    classNames('bg-violet-700 rounded-md p-3 font-semibold text-white hover:opacity-75')
-                   }> 
-                  {data.icon} {data.name} 
-                
-                </button>
-
-              ))
-            }
-        </>
-    )
-}
-
-
 
 export const GenerateQrBtn = ({ Submitting }: any) => {
 

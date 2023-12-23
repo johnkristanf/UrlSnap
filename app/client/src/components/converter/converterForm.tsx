@@ -59,7 +59,8 @@ export const ConverterForm = () => {
 
         { isError(errors) }
 
-        <div className="w-1/2 h-[90%] p-4 mt-5 text-white bg-violet-700 rounded-md">
+
+        <div className="max-lg:w-[80%] w-1/2 h-[90%] p-4 mt-5 text-white bg-violet-700 rounded-md">
 
             <h1 className="font-semibold">Please insert a valid YouTube video URL</h1>
 

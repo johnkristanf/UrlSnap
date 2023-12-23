@@ -1,8 +1,6 @@
 import { NavBar } from "../components/navbar";
 import { Footer } from "../components/footer";
 
-import  QrOptions  from "../components/qrcode/qrOptions";
-
 import { QrCodeDescription } from "../components/qrcode/qrDescription";
 import { CustomQrCodeForm } from "../components/qrcode/customQrcodeForm";
 import { QrCodeDataDisplay } from "../components/qrcode/qrCodeDataDisplay";
@@ -19,13 +17,11 @@ const qrCodeScreen = () => {
         <>
         <NavBar />
 
-            <div className="mt-5 pb-24 flex flex-col justify-start items-center w-full h-[110vh]">
+            <div className="max-xl:h-[220vh] mt-5 pb-24 flex flex-col justify-start items-center w-full h-[110vh]">
 
                 <QrCodeDescription />
 
-                <div className="w-full flex justify-around h-full">
-
-                    <QrOptions  />
+                <div className="w-full flex justify-evenly h-full max-xl:flex-col max-xl:items-center max-xl:mt-5">
 
                     <QueryClientProvider client={queryClient}>
                         <CustomQrCodeForm />

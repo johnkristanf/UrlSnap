@@ -47,7 +47,7 @@ export const QrCodeDataDisplay = () => {
 
         <>
 
-        <div className="w-[30%] mt-8 p-5 h-[93%] rounded-md bg-slate-200 scrollable-container overflow-auto">
+        <div className="max-xl:w-[80%] w-[30%] mt-8 p-5 h-[93%] rounded-md bg-slate-200 scrollable-container overflow-auto">
 
             <h1 className="text-slate-700 text-2xl font-bold mb-5">Generated Qr Codes</h1>
 

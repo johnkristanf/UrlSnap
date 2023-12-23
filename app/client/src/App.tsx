@@ -5,7 +5,7 @@ const shortUrlScreen = React.lazy(() => import('./pages/shortUrlScreen'));
 
 const qrCodeScreen = React.lazy(() => import('./pages/qrCodeScreen'));
 
-const YTConverterScreen = React.lazy(() => import('./pages/YTConverter'));
+const ConverterScreen = React.lazy(() => import('./pages/ConverterScreen'));
 
 const App = () => {
 
@@ -19,7 +19,7 @@ const App = () => {
             <Routes>
                <Route path="/" Component={shortUrlScreen} />
                <Route path="/qrcode-generator" Component={qrCodeScreen} />
-               <Route path="/yt-converter" Component={YTConverterScreen} />
+               <Route path="/yt-converter" Component={ConverterScreen} />
 
             </Routes>
 

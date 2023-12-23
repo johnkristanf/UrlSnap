@@ -15,12 +15,12 @@ export const QrCodeDataDisplayModal = ({ qrCodeData, setopenQrModal }: any) => {
     <>
         <div className="bg-gray-800 w-full h-screen fixed top-0 z-[500] opacity-75"></div>
 
-        <div className="w-full h-screen fixed top-0 z-[600] flex justify-center py-16">
+        <div className="max-md:py-0 max-md:absolute max-md:h-[120vh] w-full h-screen fixed top-0 z-[600] flex justify-center py-16">
 
 
-            <div className="bg-slate-200 w-[60%] rounded-md flex justify-evenly items-center relative">
+            <div className="max-md:flex-col max-md:gap-12 max-md:pb-10 max-md:mt-10 max-md:w-[80%] max-md:pr-10 max-md:h-full bg-slate-200 w-[60%] rounded-md flex justify-evenly items-center relative">
 
-                <div className="flex justify-between items-center absolute top-8 w-full px-8">
+                <div className="max-md:relative flex justify-between items-center absolute top-8 w-full px-8">
 
                     <label className="font-bold text-slate-700 text-3xl">Qr Code Details</label>
 

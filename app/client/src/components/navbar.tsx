@@ -40,6 +40,7 @@ export const NavBar = () => {
     )
 }
 
+
 const NavButtons = () => {
 
     return(
@@ -63,7 +64,7 @@ const MenuPopUpModal = ({ setnavToggleOn }: any) => {
 
     return(
   
-      <div className='max-md:block hidden w-full h-screen bg-violet-700 absolute top-0 z-50'>
+      <div className='max-md:block max-md:fixed hidden w-full h-screen bg-violet-700 absolute top-0 z-50'>
   
             <FontAwesomeIcon 
               className="text-5xl hover:opacity-75 text-white cursor-pointer absolute right-4 top-2"

@@ -5,7 +5,7 @@ import { ConverterForm } from "../components/converter/converterForm";
 
 import { QueryClientProvider, QueryClient } from "react-query";
 
-const YTConverter = () => {
+const ConverterScreen = () => {
 
     const queryClient = new QueryClient();
     
@@ -15,11 +15,12 @@ const YTConverter = () => {
         <>
           <NavBar />
 
-          <div className="mt-10 pb-24 flex flex-col justify-start items-center w-full h-[50vh]">
+          <div className="max-xl:h-[60vh] mt-10 pb-24 flex flex-col justify-start items-center w-full h-[50vh]">
 
                 <CoverterDescription />
 
                 <div className="w-full flex justify-around h-full">
+                    
                     <QueryClientProvider client={queryClient}>
                         <ConverterForm />
                         
@@ -36,4 +37,4 @@ const YTConverter = () => {
     )
 }
 
-export default YTConverter;
+export default ConverterScreen;

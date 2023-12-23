@@ -7,7 +7,8 @@ export const DownloadAudio = ({ setaudioFilePath, audioFilePath }: any) => {
     const audioTittle = splitPathArray[splitPathArray.length - 1];
 
     return(
-        <div className="w-[27%] h-[90%] p-4 mt-8 text-white bg-violet-700 rounded-md">
+
+        <div className="max-lg:w-[60%] max-sm:w-[80%] w-[40%] h-[90%] p-4 mt-8 text-white bg-violet-700 rounded-md">
 
             <h1 className="font-semibold">{ audioTittle }</h1>
 
